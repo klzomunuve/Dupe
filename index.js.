@@ -1,0 +1,10 @@
+// index.js
+
+import makeWASocket, { DisconnectReason, fetchLatestBaileysVersion, useMultiFileAuthState, makeInMemoryStore, jidDecode, delay } from '@whiskeysockets/baileys'; import pino from 'pino'; import fs from 'fs'; import chalk from 'chalk'; import { fileURLToPath } from 'url'; import { dirname } from 'path'; import pkg from 'pg'; import fetch from 'node-fetch';
+
+// Constants and Config const OWNER_NAME = 'Alfredo'; const PREFIX = '.'; const PUBLIC_MODE = false; const AUTO_READ_STATUS = true; const AUTO_DOWNLOAD_STATUS = false; const BOT_NAME = 'Alfredo bot'; const IMAGE_MENU = 'https://telegra.ph/file/0c225f7da5616cdcbec80.jpg'; const NUMERO_OWNER = '254759729937'; const DATABASE_URL = 'postgresql://postgres:bKlIqoOUWFIHOAhKxRWQtGfKfhGKgmRX@viaduct.proxy.rlwy.net:47738/railway'; const STARTING_BOT_MESSAGE = true; const ANTI_DELETE_MESSAGE = true; const OPENAI_API_KEY = ''; // Add if needed const SESSION_ID = ''; // Insert yours if using cloud deploy
+
+// Database Setup const { Pool } = pkg; const pool = new Pool({ connectionString: DATABASE_URL });
+
+// Auth state setup const __filename = fileURLToPath(import.meta.url); const __dirname = dirname(__filename); const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) }); store.readFromFile(__dirname + '/baileys_store.json'); setInterval(() => store.write
+
